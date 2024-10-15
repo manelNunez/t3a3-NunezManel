@@ -14,7 +14,9 @@
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.T3a3NunezManel.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">

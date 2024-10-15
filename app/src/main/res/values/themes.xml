@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.T3a3NunezManel" parent="Base.Theme.T3a3NunezManel" />
+
+    <style name="Theme.T3a3NunezManel.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.T3a3NunezManel.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.T3a3NunezManel.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
