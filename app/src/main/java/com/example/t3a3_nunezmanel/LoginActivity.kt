@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.t3a3_nunezmanel.databinding.ActivityLoginBinding
+import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,25 +20,46 @@ class LoginActivity : AppCompatActivity() {
 
         val entrar = binding.enviarBtn
 
-        entrar.setOnClickListener{
-            val intent:Intent = Intent(this, MainActivity::class.java)
+        entrar.setOnClickListener {
+            val intent: Intent = Intent(this, MainActivity::class.java)
             val usuario = binding.usuarioTiet
             val password = binding.passwordTiet
-            if(usuario.text.toString().length == 9){
-                binding.usuarioTil.error = null
-                if (password.text.toString().length > 1){
-                    binding.passwordTil.error = null
-                    intent.putExtra("Usuario",usuario.text.toString())
-                    intent.putExtra("Password",password.text.toString())
-                    startActivity(intent)
-                }else{
-                    binding.passwordTil.error = "Introduce una contraseña correcta"
-                }
-            }else{
-                binding.usuarioTil.error = "Introduce un usuario correcto"
-            }
+            var validation = true
 
+
+            if (usuario.text.toString().length == 9) {
+                if (usuario.text.toString().matches(Regex("\\d{8}[a-zA-Z]?"))) {
+                    binding.usuarioTil.error = null
+                } else {
+                    binding.usuarioTil.error = "Introduce un DNI correcto de 8 digitos y una letra"
+                    validation = false
+                }
+            } else {
+                binding.usuarioTil.error = "Introduce un DNI incorrecto"
+                validation = false
+            }
+            if (password.text.toString().length > 8) {
+                if (password.text.toString().matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#\$%^&+=!]).{8,}$")))
+                    binding.passwordTil.error = null
+                else {
+                    binding.passwordTil.error = "La contraseña debe tener al menos 8 caracteres, con 1 minúscula, 1 mayúscula, 1 número y 1 símbolo"
+                    binding.passwordTil.errorIconDrawable = null
+                    validation = false
+                }
+            } else {
+                binding.passwordTil.error = "Introduce una contraseña correcta de 8 o mas caracteres"
+                binding.passwordTil.errorIconDrawable = null
+                validation = false
+            }
+            binding.passwordTil.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+
+            if (validation) {
+                intent.putExtra("Usuario", usuario.text.toString())
+                intent.putExtra("Password", password.text.toString())
+                startActivity(intent)
+            }
         }
+
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
