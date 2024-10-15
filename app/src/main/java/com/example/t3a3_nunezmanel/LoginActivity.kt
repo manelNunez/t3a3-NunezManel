@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.t3a3_nunezmanel.databinding.ActivityLoginBinding
 import com.google.android.material.textfield.TextInputLayout
+import kotlin.system.exitProcess
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val entrar = binding.enviarBtn
+        val salir = binding.salirBtn
 
         entrar.setOnClickListener {
             val intent: Intent = Intent(this, MainActivity::class.java)
@@ -59,6 +61,13 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        salir.setOnClickListener{
+
+            exitProcess(0);
+
+        }
+
 
 
         super.onCreate(savedInstanceState)
